@@ -29,6 +29,14 @@ class Student:
                 f"Курсы в процессе изучения: {', '.join(self.courses_in_progress)}\n"
                 f"Завершенные курсы: {', '.join(self.finished_courses)}")
     
+    def __lt__(self, other):
+        if isinstance(other, Student):
+            return self.average_grade() < other.average_grade()
+        
+    def __eq__(self, other):
+        if isinstance(other, Student):
+            return self.average_grade() == other.average_grade()
+    
 
 class Mentor:
     def __init__(self, first_name, last_name):
@@ -67,23 +75,41 @@ class Lecturer(Mentor):
         return (f"Имя: {self.first_name}\n"
                 f"Фамилия: {self.last_name}\n"
                 f"Средняя оценка за лекции: {self.average_grade()}")
+    
+    def __lt__(self, other):
+        if isinstance(other, Lecturer):
+            return self.average_grade() < other.average_grade()
+        
+    def __eq__(self, other):
+        if isinstance(other, Lecturer):
+            return self.average_grade() == other.average_grade()
 
     
 some_student = Student("Ruoy", "Eman")
 some_student.courses_in_progress += ["Python", "Git"]
 some_student.finished_courses += ["Введение в программирование"]
 
+some_student_1 = Student("Ruoy", "Eman")
+some_student_1.courses_in_progress += ["Python", "Git"]
+some_student_1.finished_courses += ["Введение в программирование"]
+
 some_lecturer = Lecturer("Some", "Buddy")
 some_lecturer.courses_attached += ["Python"]
 
+some_lecturer_1 = Lecturer("Some", "Buddy")
+some_lecturer_1.courses_attached += ["Python"]
+
 some_reviewer = Reviewer("Some", "Budy")
 some_reviewer.courses_attached += ["Python"]
+
+some_reviewer_1 = Reviewer("Some", "Buddy")
+some_reviewer_1.courses_attached += ["Python"]
  
 some_reviewer.rate_hw(some_student, "Python", 8)
-some_reviewer.rate_hw(some_student, "Python", 9)
+some_reviewer.rate_hw(some_student_1, "Python", 9)
 
 some_student.rate_lecturer(some_lecturer, "Python", 9)
-some_student.rate_lecturer(some_lecturer, "Python", 9)
+some_student_1.rate_lecturer(some_lecturer, "Python", 9)
 
 
 print(some_student)
@@ -92,6 +118,12 @@ print(some_lecturer)
 print()
 print(some_reviewer)
     
+print()
+
+print(some_student < some_student_1)
+print(some_student == some_student_1)
+print(some_lecturer > some_lecturer_1)
+print(some_lecturer == some_lecturer_1)
 
 
 
