@@ -16,14 +16,19 @@ class Student:
         else:
             return "Ошибка"
 
+    def average_grade(self):
+        if not self.grades:
+            return 0.0
+        all_grades = [grd for grade in self.grades.values() for grd in grade]
+        return round(sum(all_grades) / len(all_grades), 1)
+
     def __str__(self):
         return (f"Имя: {self.first_name}\n"
                 f"Фамилия: {self.last_name}\n"
-                f"Средняя оценка за домашние задания: {9.9}\n"
+                f"Средняя оценка за домашние задания: {self.average_grade()}\n"
                 f"Курсы в процессе изучения: {', '.join(self.courses_in_progress)}\n"
-                f"Завершенные курсы: {", ".join(self.finished_courses)}")
-
-
+                f"Завершенные курсы: {', '.join(self.finished_courses)}")
+    
 
 class Mentor:
     def __init__(self, first_name, last_name):
@@ -52,10 +57,16 @@ class Lecturer(Mentor):
         super().__init__(first_name, last_name)
         self.lector_grades = {}
 
+    def average_grade(self):
+        if not self.lector_grades:
+            return 0.0
+        all_grades = [grd for grade in self.lector_grades.values() for grd in grade]
+        return round(sum(all_grades) / len(all_grades), 1)
+    
     def __str__(self):
         return (f"Имя: {self.first_name}\n"
                 f"Фамилия: {self.last_name}\n"
-                f"Средняя оценка за лекции: {9.9}")
+                f"Средняя оценка за лекции: {self.average_grade()}")
 
     
 some_student = Student("Ruoy", "Eman")
@@ -68,6 +79,12 @@ some_lecturer.courses_attached += ["Python"]
 some_reviewer = Reviewer("Some", "Budy")
 some_reviewer.courses_attached += ["Python"]
  
+some_reviewer.rate_hw(some_student, "Python", 8)
+some_reviewer.rate_hw(some_student, "Python", 9)
+
+some_student.rate_lecturer(some_lecturer, "Python", 9)
+some_student.rate_lecturer(some_lecturer, "Python", 9)
+
 
 print(some_student)
 print()
