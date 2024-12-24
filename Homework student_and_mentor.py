@@ -120,6 +120,31 @@ print(some_reviewer)
     
 print()
 
+students_list = [some_student, some_student_1]
+lecturers_list = [some_lecturer, some_lecturer_1]
+
+def average_all_students_grade(students_list, course):
+    all_grades = []
+    [all_grades.extend(student.grades[course]) for student in students_list if course in student.grades]
+    if not all_grades:
+        return 0.0
+    else:
+        return round(sum(all_grades) / len(all_grades), 1)
+
+
+def average_all_lecturers_grade(lecturers_list, course):
+    all_grades = []
+    [all_grades.extend(lecturer.lector_grades[course]) for lecturer in lecturers_list if course in lecturer.lector_grades]
+    if not all_grades:
+        return 0.0
+    else:
+        return round(sum(all_grades) / len(all_grades), 1)
+
+
+print(f'Средняя оценка ВСЕМ студентам за курс: {average_all_students_grade(students_list, "Python")}')
+print(f'Средняя оценка ВСЕМ лекторам за курс: {average_all_lecturers_grade(lecturers_list, "Python")}')
+print()
+
 print(some_student < some_student_1)
 print(some_student == some_student_1)
 print(some_lecturer > some_lecturer_1)
