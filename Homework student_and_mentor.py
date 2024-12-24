@@ -105,10 +105,10 @@ some_reviewer.courses_attached += ["Python"]
 some_reviewer_1 = Reviewer("Some", "Buddy")
 some_reviewer_1.courses_attached += ["Python"]
  
-some_reviewer.rate_hw(some_student, "Python", 8)
+some_reviewer.rate_hw(some_student, "Python", 9)
 some_reviewer.rate_hw(some_student_1, "Python", 9)
 
-some_student.rate_lecturer(some_lecturer, "Python", 9)
+some_student.rate_lecturer(some_lecturer, "Python", 7)
 some_student_1.rate_lecturer(some_lecturer, "Python", 9)
 
 
